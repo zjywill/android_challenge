@@ -27,9 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity
-        extends ListActivity
-        implements Callback {
+public class MainActivity extends ListActivity implements Callback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private List<NewsEntity> newsItemList;
@@ -70,7 +68,8 @@ public class MainActivity
 
     private void loadResource(final Callback callback) {
         new Thread(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 try {
                     URL url = new URL("https://api.myjson.com/bins/nl6jh");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -97,9 +96,11 @@ public class MainActivity
         return sb.toString();
     }
 
-    @Override public void onResult(final String data) {
+    @Override
+    public void onResult(final String data) {
         handler.postDelayed(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 JSONObject jsonObject;
 
                 try {
@@ -114,14 +115,17 @@ public class MainActivity
                     Log.e(TAG, "fail to parse json string");
                 }
 
-                NewsListAdapter adapter = new NewsListAdapter(MainActivity.this, R.layout.list_item_news, newsItemList);
+                NewsListAdapter adapter = new NewsListAdapter(MainActivity.this,
+                                                              R.layout.list_item_news,
+                                                              newsItemList);
                 setListAdapter(adapter);
 
                 ListView listView = getListView();
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
                         NewsEntity newsEntity = newsItemList.get(position);
                         String title = newsEntity.getTitle();
                         Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
@@ -132,5 +136,4 @@ public class MainActivity
             }
         }, 0);
     }
-
 }
