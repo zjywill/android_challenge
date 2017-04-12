@@ -2,6 +2,8 @@ package news.agoda.com.sample;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import news.agoda.com.sample.base.BaseListActivity;
+import news.agoda.com.sample.injection.component.ApplicationComponent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ListActivity implements Callback {
+public class MainActivity extends BaseListActivity implements Callback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private List<NewsEntity> newsItemList;
@@ -42,6 +44,11 @@ public class MainActivity extends ListActivity implements Callback {
         newsItemList = new ArrayList<>();
 
         loadResource(this);
+    }
+
+    @Override
+    protected void injectDependencies(ApplicationComponent component) {
+        component.inject(this);
     }
 
     @Override
