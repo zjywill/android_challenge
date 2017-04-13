@@ -97,6 +97,20 @@ public class MainActivity extends BaseListActivity {
                                                               R.layout.list_item_news,
                                                               newsItemList);
                 setListAdapter(adapter);
+
+                ListView listView = getListView();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+                        NewsEntity newsEntity = newsItemList.get(position);
+                        String title = newsEntity.getTitle();
+                        Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
+                        intent.putExtra("title", title);
+                        startActivity(intent);
+                    }
+                });
             });
     }
 

@@ -17,14 +17,14 @@ public class MediaEntity {
     private String copyright;
 
     public MediaEntity(JSONObject jsonObject) throws JSONException {
-        url = jsonObject.getString("url");
-        format = jsonObject.getString("format");
-        height = jsonObject.getInt("height");
-        width = jsonObject.getInt("width");
-        type = jsonObject.getString("type");
-        subType = jsonObject.getString("subtype");
-        caption = jsonObject.getString("capton");
-        copyright = jsonObject.getString("copyright");
+        url = jsonObject.optString("url");
+        format = jsonObject.optString("format");
+        height = jsonObject.optInt("height");
+        width = jsonObject.optInt("width");
+        type = jsonObject.optString("type");
+        subType = jsonObject.optString("subtype");
+        caption = jsonObject.optString("capton");
+        copyright = jsonObject.optString("copyright");
     }
 
     public String getUrl() {

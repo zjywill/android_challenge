@@ -35,11 +35,11 @@ public class DetailViewActivity extends Activity {
         titleView.setText(title);
         summaryView.setText(summary);
 
-        DraweeController draweeController = Fresco.newDraweeControllerBuilder()
-            .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
-            .setOldController(imageView.getController())
-            .build();
-        imageView.setController(draweeController);
+        //DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+        //    .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
+        //    .setOldController(imageView.getController())
+        //    .build();
+        //imageView.setController(draweeController);
     }
 
     public void onFullStoryClicked(View view) {

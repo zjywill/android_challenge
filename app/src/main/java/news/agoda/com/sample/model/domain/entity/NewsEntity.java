@@ -22,18 +22,21 @@ public class NewsEntity {
     public NewsEntity(JSONObject jsonObject) {
         try {
             mediaEntityList = new ArrayList<>();
-            title = jsonObject.getString("title");
-            summary = jsonObject.getString("abstract");
-            articleUrl = jsonObject.getString("url");
-            byline = jsonObject.getString("byline");
-            publishedDate = jsonObject.getString("published_date");
-            JSONArray mediaArray = jsonObject.getJSONArray("multimedia");
-            for (int i = 0; i < mediaArray.length(); i++) {
-                JSONObject mediaObject = mediaArray.getJSONObject(i);
-                MediaEntity mediaEntity = new MediaEntity(mediaObject);
-                mediaEntityList.add(mediaEntity);
+            title = jsonObject.optString("title");
+            summary = jsonObject.optString("abstract");
+            articleUrl = jsonObject.optString("url");
+            byline = jsonObject.optString("byline");
+            publishedDate = jsonObject.optString("published_date");
+            JSONArray mediaArray = jsonObject.optJSONArray("multimedia");
+            if (mediaArray != null) {
+                for (int i = 0; i < mediaArray.length(); i++) {
+                    JSONObject mediaObject = mediaArray.getJSONObject(i);
+                    MediaEntity mediaEntity = new MediaEntity(mediaObject);
+                    mediaEntityList.add(mediaEntity);
+                }
             }
         } catch (JSONException exception) {
+            exception.printStackTrace();
             Log.e(TAG, exception.getMessage());
         }
     }
