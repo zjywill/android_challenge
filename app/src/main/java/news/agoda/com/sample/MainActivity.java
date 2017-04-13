@@ -20,6 +20,7 @@ import news.agoda.com.sample.base.BaseListActivity;
 import news.agoda.com.sample.injection.component.ApplicationComponent;
 import news.agoda.com.sample.model.domain.ApiManager;
 import news.agoda.com.sample.model.domain.entity.NewsEntity;
+import news.agoda.com.sample.util.Loge;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,6 +83,7 @@ public class MainActivity extends BaseListActivity {
                     for (int i = 0; i < resultArray.length(); i++) {
                         JSONObject newsObject = resultArray.getJSONObject(i);
                         NewsEntity newsEntity = new NewsEntity(newsObject);
+                        Loge.d("entity: " + newsEntity.getTitle());
                         list.add(newsEntity);
                     }
                 } catch (JSONException e) {

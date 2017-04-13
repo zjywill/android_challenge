@@ -4,7 +4,6 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import news.agoda.com.sample.model.domain.client.ApiClient;
-import news.agoda.com.sample.model.domain.entity.NewsEntity;
 
 /**
  * Created by junyizhang on 13/04/2017.
