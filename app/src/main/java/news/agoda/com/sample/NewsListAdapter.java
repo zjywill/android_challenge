@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
-
 import java.util.List;
 
 public class NewsListAdapter extends ArrayAdapter {
@@ -45,8 +43,10 @@ public class NewsListAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.newsTitle.setText(newsEntity.getTitle());
-        DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
-                (Uri.parse(thumbnailURL))).setOldController(viewHolder.imageView.getController()).build();
+        DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+            .setImageRequest(ImageRequest.fromUri(Uri.parse(thumbnailURL)))
+            .setOldController(viewHolder.imageView.getController())
+            .build();
         viewHolder.imageView.setController(draweeController);
         return convertView;
     }

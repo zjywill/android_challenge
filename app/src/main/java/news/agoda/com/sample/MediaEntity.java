@@ -58,5 +58,4 @@ public class MediaEntity {
     public String getCopyright() {
         return copyright;
     }
-
 }

@@ -28,13 +28,17 @@ android {
 }
 
 dependencies {
-  compile 'com.google.dagger:dagger:2.8'
-  compile 'com.squareup.retrofit2:retrofit:2.2.0'
-  compile 'com.squareup.okhttp3:okhttp:3.6.0'
-  compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-  compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+  compile rootProject.ext.libraries.rxjava
+  compile rootProject.ext.libraries.rxandroid
+  compile rootProject.ext.libraries.retrofit
+  compile rootProject.ext.libraries.retrofitConverter
+  compile rootProject.ext.libraries.retrofitAdapter
+  compile rootProject.ext.libraries.okhttp
+  compile rootProject.ext.libraries.okhttpWS
+  compile rootProject.ext.libraries.okhttpLogging
+  compile rootProject.ext.libraries.dagger
+  provided rootProject.ext.aptLibraries.daggerCompiler
   compile 'com.google.code.gson:gson:2.6.2'
   compile 'com.facebook.fresco:fresco:0.10.0'
-  apt 'com.google.dagger:dagger-compiler:2.8'
   testCompile 'junit:junit:4.12'
 }

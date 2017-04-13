@@ -1,11 +1,11 @@
 package news.agoda.com.sample.base;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import news.agoda.com.sample.MainApplication;
 import news.agoda.com.sample.injection.component.ApplicationComponent;
 
-public abstract class BaseListActivity extends ListActivity {
+public abstract class BaseFragmentActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

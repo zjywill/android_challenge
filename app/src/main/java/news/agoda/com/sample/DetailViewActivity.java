@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
@@ -37,8 +36,9 @@ public class DetailViewActivity extends Activity {
         summaryView.setText(summary);
 
         DraweeController draweeController = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
-                .setOldController(imageView.getController()).build();
+            .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
+            .setOldController(imageView.getController())
+            .build();
         imageView.setController(draweeController);
     }
 

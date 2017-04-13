@@ -3,12 +3,9 @@ package news.agoda.com.sample.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
-import java.io.File;
 
 /**
  * Created by zjy on 3/9/16.
@@ -94,5 +91,4 @@ public class Show {
             context.startActivity(systemSetting);
         }
     }
-
 }

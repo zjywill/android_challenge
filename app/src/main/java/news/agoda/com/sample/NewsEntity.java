@@ -1,13 +1,11 @@
 package news.agoda.com.sample;
 
 import android.util.Log;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This represents a news item
@@ -35,7 +33,6 @@ public class NewsEntity {
                 MediaEntity mediaEntity = new MediaEntity(mediaObject);
                 mediaEntityList.add(mediaEntity);
             }
-
         } catch (JSONException exception) {
             Log.e(TAG, exception.getMessage());
         }
