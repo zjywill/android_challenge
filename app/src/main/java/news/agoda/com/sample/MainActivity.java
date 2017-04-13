@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +21,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import news.agoda.com.sample.base.BaseListActivity;
 import news.agoda.com.sample.injection.component.ApplicationComponent;
+import news.agoda.com.sample.model.domain.ApiManager;
+import news.agoda.com.sample.util.Loge;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +35,8 @@ public class MainActivity extends BaseListActivity implements Callback {
     private static final String TAG = MainActivity.class.getSimpleName();
     private List<NewsEntity> newsItemList;
     private Handler handler = new Handler(Looper.getMainLooper());
+    @Inject
+    ApiManager apiManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,19 +77,25 @@ public class MainActivity extends BaseListActivity implements Callback {
     }
 
     private void loadResource(final Callback callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://api.myjson.com/bins/nl6jh");
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    String readStream = readStream(con.getInputStream());
-                    callback.onResult(readStream);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        apiManager.getNews().subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(newsEntity -> {
+                Loge.d("news: "+newsEntity);
+            });
+
+        //new Thread(new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        try {
+        //            URL url = new URL("https://api.myjson.com/bins/nl6jh");
+        //            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        //            String readStream = readStream(con.getInputStream());
+        //            callback.onResult(readStream);
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
+        //    }
+        //}).start();
     }
 
     private static String readStream(InputStream in) {

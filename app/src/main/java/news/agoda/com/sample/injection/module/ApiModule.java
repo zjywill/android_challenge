@@ -1,17 +1,16 @@
 package news.agoda.com.sample.injection.module;
 
-import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 import news.agoda.com.sample.model.domain.client.ApiClient;
+import news.agoda.com.sample.util.StringConverterFactory;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by junyizhang on 13/04/2017.
@@ -38,14 +37,8 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public Converter.Factory provideGsonConverterFactory(Gson gson) {
-        return GsonConverterFactory.create(gson);
-    }
-
-    @Singleton
-    @Provides
-    public Gson provideGson() {
-        return new Gson();
+    public Converter.Factory provideStringConverterFactory() {
+        return new StringConverterFactory();
     }
 
     @Provides

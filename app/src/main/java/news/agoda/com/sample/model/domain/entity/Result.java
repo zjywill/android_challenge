@@ -42,18 +42,6 @@ public class Result {
     @SerializedName("kicker")
     @Expose
     private String kicker;
-    @SerializedName("des_facet")
-    @Expose
-    private List<String> desFacet = null;
-    @SerializedName("org_facet")
-    @Expose
-    private String orgFacet;
-    @SerializedName("per_facet")
-    @Expose
-    private String perFacet;
-    @SerializedName("geo_facet")
-    @Expose
-    private List<String> geoFacet = null;
     @SerializedName("multimedia")
     @Expose
     private List<Multimedium> multimedia = null;
@@ -152,38 +140,6 @@ public class Result {
 
     public void setKicker(String kicker) {
         this.kicker = kicker;
-    }
-
-    public List<String> getDesFacet() {
-        return desFacet;
-    }
-
-    public void setDesFacet(List<String> desFacet) {
-        this.desFacet = desFacet;
-    }
-
-    public String getOrgFacet() {
-        return orgFacet;
-    }
-
-    public void setOrgFacet(String orgFacet) {
-        this.orgFacet = orgFacet;
-    }
-
-    public String getPerFacet() {
-        return perFacet;
-    }
-
-    public void setPerFacet(String perFacet) {
-        this.perFacet = perFacet;
-    }
-
-    public List<String> getGeoFacet() {
-        return geoFacet;
-    }
-
-    public void setGeoFacet(List<String> geoFacet) {
-        this.geoFacet = geoFacet;
     }
 
     public List<Multimedium> getMultimedia() {

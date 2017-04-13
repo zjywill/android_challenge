@@ -7,10 +7,12 @@ import java.io.File;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import news.agoda.com.sample.BuildConfig;
+import news.agoda.com.sample.model.domain.Domains;
 import news.agoda.com.sample.util.AppSchedulerProvider;
 import news.agoda.com.sample.util.Constants;
 import news.agoda.com.sample.util.SchedulerProvider;
 import news.agoda.com.sample.util.Utils;
+import okhttp3.HttpUrl;
 
 @Module
 public class ApplicationModule {
@@ -19,6 +21,12 @@ public class ApplicationModule {
     @Named("isDebug")
     boolean provideIsDebug() {
         return BuildConfig.DEBUG;
+    }
+
+    @Provides
+    @Singleton
+    HttpUrl provideEndpoint() {
+        return HttpUrl.parse(Domains.NEWS_URL);
     }
 
     @Provides
