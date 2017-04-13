@@ -12,6 +12,7 @@ android {
     targetSdkVersion 25
     versionCode 1
     versionName "1.0.0"
+    multiDexEnabled true
   }
 
   compileOptions {
@@ -28,6 +29,8 @@ android {
 }
 
 dependencies {
+  compile rootProject.ext.libraries.multidexSupport
+  compile rootProject.ext.libraries.androidSupport_v4
   compile rootProject.ext.libraries.rxjava
   compile rootProject.ext.libraries.rxandroid
   compile rootProject.ext.libraries.retrofit
@@ -38,7 +41,6 @@ dependencies {
   compile rootProject.ext.libraries.okhttpLogging
   compile rootProject.ext.libraries.dagger
   provided rootProject.ext.aptLibraries.daggerCompiler
-  compile 'com.google.code.gson:gson:2.6.2'
-  compile 'com.facebook.fresco:fresco:0.10.0'
+  compile rootProject.ext.libraries.glide
   testCompile 'junit:junit:4.12'
 }

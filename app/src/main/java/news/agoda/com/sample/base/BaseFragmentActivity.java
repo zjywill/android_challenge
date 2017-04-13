@@ -12,8 +12,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         injectDependencies(MainApplication.getComponent());
-
-        // can be used for general purpose in all Activities of Application
     }
 
     protected abstract void injectDependencies(ApplicationComponent component);

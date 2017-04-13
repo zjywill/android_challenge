@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class MainActivity extends BaseListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fresco.initialize(this);
 
         newsItemList = new ArrayList<>();
 
@@ -106,51 +104,20 @@ public class MainActivity extends BaseListActivity {
                                             long id) {
                         NewsEntity newsEntity = newsItemList.get(position);
                         String title = newsEntity.getTitle();
+                        String summary = newsEntity.getSummary();
+                        String storyURL = newsEntity.getArticleUrl();
                         Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
-                        intent.putExtra("title", title);
+                        Loge.d("title a: " + title);
+                        Loge.d("summary a: " + summary);
+                        Loge.d("storyURL a: " + storyURL);
+                        Bundle extras = new Bundle();
+                        extras.putString("title", title);
+                        extras.putString("summary", summary);
+                        extras.putString("storyURL", storyURL);
+                        intent.putExtras(extras);
                         startActivity(intent);
                     }
                 });
             });
-    }
-
-    public void onResult(final String data) {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                JSONObject jsonObject;
-
-                try {
-                    jsonObject = new JSONObject(data);
-                    JSONArray resultArray = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < resultArray.length(); i++) {
-                        JSONObject newsObject = resultArray.getJSONObject(i);
-                        NewsEntity newsEntity = new NewsEntity(newsObject);
-                        newsItemList.add(newsEntity);
-                    }
-                } catch (JSONException e) {
-                    Log.e(TAG, "fail to parse json string");
-                }
-
-                NewsListAdapter adapter = new NewsListAdapter(MainActivity.this,
-                                                              R.layout.list_item_news,
-                                                              newsItemList);
-                setListAdapter(adapter);
-
-                ListView listView = getListView();
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                                            long id) {
-                        NewsEntity newsEntity = newsItemList.get(position);
-                        String title = newsEntity.getTitle();
-                        Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
-                        intent.putExtra("title", title);
-                        startActivity(intent);
-                    }
-                });
-            }
-        }, 0);
     }
 }

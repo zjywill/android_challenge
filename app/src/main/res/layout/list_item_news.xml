@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:fresco="http://schemas.android.com/apk/res-auto"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/news_item_image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        fresco:placeholderImage="@drawable/place_holder"
-        fresco:placeholderImageScaleType="centerCrop" />
+  <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:layout_marginTop="16dp"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      >
 
     <TextView
         android:id="@+id/news_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingStart="10dp"
-        android:paddingRight="10dp"
-        android:paddingEnd="10dp"
-        android:text="asdasdasdasdadasdasda"/>
+        android:maxLines="2"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:textColor="#212121"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="asdasdasdasdadasdasda"
+        />
+    <TextView
+        android:id="@+id/news_abstract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLines="3"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:textColor="#757575"
+        android:textSize="16sp"
+        tools:text="asdasdasdasdadasdasda"
+        />
+  </LinearLayout>
+
+
+  <ImageView
+      android:id="@+id/news_item_image"
+      android:layout_width="72dp"
+      android:layout_height="72dp"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginBottom="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="16dp"
+      android:scaleType="fitXY"
+      />
+
 
 </LinearLayout>

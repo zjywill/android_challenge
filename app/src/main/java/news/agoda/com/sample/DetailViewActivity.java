@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.DraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
+import news.agoda.com.sample.util.Loge;
 
 /**
  * News detail view
@@ -28,8 +26,12 @@ public class DetailViewActivity extends Activity {
         String summary = extras.getString("summary");
         String imageURL = extras.getString("imageURL");
 
+        Loge.d("title: " + title);
+        Loge.d("summary: " + summary);
+        Loge.d("storyURL: " + storyURL);
+
         TextView titleView = (TextView) findViewById(R.id.title);
-        DraweeView imageView = (DraweeView) findViewById(R.id.news_image);
+        ImageView imageView = (ImageView) findViewById(R.id.news_image);
         TextView summaryView = (TextView) findViewById(R.id.summary_content);
 
         titleView.setText(title);
