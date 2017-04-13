@@ -1,4 +1,4 @@
-package news.agoda.com.sample;
+package news.agoda.com.sample.model.domain.entity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

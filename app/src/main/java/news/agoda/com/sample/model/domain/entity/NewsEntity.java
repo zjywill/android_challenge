@@ -1,75 +1,64 @@
 package news.agoda.com.sample.model.domain.entity;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.util.Log;
+import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+/**
+ * This represents a news item
+ */
 public class NewsEntity {
+    private static final String TAG = NewsEntity.class.getSimpleName();
+    private String title;
+    private String summary;
+    private String articleUrl;
+    private String byline;
+    private String publishedDate;
+    private List<MediaEntity> mediaEntityList;
 
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("copyright")
-    @Expose
-    private String copyright;
-    @SerializedName("section")
-    @Expose
-    private String section;
-    @SerializedName("last_updated")
-    @Expose
-    private String lastUpdated;
-    @SerializedName("num_results")
-    @Expose
-    private Long numResults;
-    @SerializedName("results")
-    @Expose
-    private List<Result> results = null;
-
-    public String getStatus() {
-        return status;
+    public NewsEntity(JSONObject jsonObject) {
+        try {
+            mediaEntityList = new ArrayList<>();
+            title = jsonObject.getString("title");
+            summary = jsonObject.getString("abstract");
+            articleUrl = jsonObject.getString("url");
+            byline = jsonObject.getString("byline");
+            publishedDate = jsonObject.getString("published_date");
+            JSONArray mediaArray = jsonObject.getJSONArray("multimedia");
+            for (int i = 0; i < mediaArray.length(); i++) {
+                JSONObject mediaObject = mediaArray.getJSONObject(i);
+                MediaEntity mediaEntity = new MediaEntity(mediaObject);
+                mediaEntityList.add(mediaEntity);
+            }
+        } catch (JSONException exception) {
+            Log.e(TAG, exception.getMessage());
+        }
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getTitle() {
+        return title;
     }
 
-    public String getCopyright() {
-        return copyright;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setCopyright(String copyright) {
-        this.copyright = copyright;
+    public String getArticleUrl() {
+        return articleUrl;
     }
 
-    public String getSection() {
-        return section;
+    public String getByline() {
+        return byline;
     }
 
-    public void setSection(String section) {
-        this.section = section;
+    public String getPublishedDate() {
+        return publishedDate;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public Long getNumResults() {
-        return numResults;
-    }
-
-    public void setNumResults(Long numResults) {
-        this.numResults = numResults;
-    }
-
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public List<MediaEntity> getMediaEntity() {
+        return mediaEntityList;
     }
 }
