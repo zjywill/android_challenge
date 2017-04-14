@@ -5,6 +5,10 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 import news.agoda.com.sample.activity.MainActivity;
+import news.agoda.com.sample.fragment.article.ArticleModule;
+import news.agoda.com.sample.fragment.article.ArticleSubComponent;
+import news.agoda.com.sample.fragment.headline.HeadLineModule;
+import news.agoda.com.sample.fragment.headline.HeadLineSubComponent;
 import news.agoda.com.sample.injection.module.AndroidModule;
 import news.agoda.com.sample.injection.module.ApiModule;
 import news.agoda.com.sample.injection.module.ApplicationModule;
@@ -18,4 +22,7 @@ public interface ApplicationComponent {
 
     void inject(MainActivity activity);
 
+    ArticleSubComponent plus(ArticleModule module);
+
+    HeadLineSubComponent plus(HeadLineModule module);
 }
