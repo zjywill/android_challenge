@@ -14,5 +14,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         injectDependencies(MainApplication.getComponent());
     }
 
+    @Override
+    public boolean isLocalVoiceInteractionSupported() {
+        return super.isLocalVoiceInteractionSupported();
+    }
+
     protected abstract void injectDependencies(ApplicationComponent component);
 }
