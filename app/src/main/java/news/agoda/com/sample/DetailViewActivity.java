@@ -18,7 +18,7 @@ public class DetailViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.fragment_article);
 
         Bundle extras = getIntent().getExtras();
         storyURL = extras.getString("storyURL");

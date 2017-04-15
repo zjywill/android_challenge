@@ -1,4 +1,4 @@
-package news.agoda.com.sample;
+package news.agoda.com.sample.fragment.headline;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,25 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import java.util.ArrayList;
 import java.util.List;
-import news.agoda.com.sample.model.domain.entity.MediaEntity;
+import news.agoda.com.sample.R;
 import news.agoda.com.sample.model.domain.entity.NewsEntity;
-import news.agoda.com.sample.util.Loge;
 
-public class NewsListAdapter extends BaseAdapter {
-    private static class ViewHolder {
-        TextView newsTitle;
-        TextView newsAbstract;
-        ImageView imageView;
-    }
-
-    private List<NewsEntity> newsItemList;
+public class HeadLineListAdapter extends BaseAdapter {
+    private List<NewsEntity> newsItemList = new ArrayList<>();
     private Context context;
-
-    public NewsListAdapter(Context context, int resource, List<NewsEntity> objects) {
+    public HeadLineListAdapter(Context context) {
         super();
         this.context = context;
-        this.newsItemList = objects;
+    }
+
+    public void setNewsItemList(List<NewsEntity> newsItemList) {
+        this.newsItemList.clear();
+        this.newsItemList.addAll(newsItemList);
     }
 
     @Override
@@ -36,7 +33,7 @@ public class NewsListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -63,20 +60,22 @@ public class NewsListAdapter extends BaseAdapter {
         viewHolder.newsTitle.setText(newsEntity.getTitle());
         viewHolder.newsAbstract.setText(newsEntity.getSummary());
 
-        List<MediaEntity> mediaEntityList = newsEntity.getMediaEntity();
-        if (mediaEntityList != null && mediaEntityList.size() > 0) {
+        String standardImage = newsEntity.getStandardImage();
+        if (standardImage != null) {
             viewHolder.imageView.setVisibility(View.VISIBLE);
-            String thumbnailURL = "";
-            MediaEntity mediaEntity = mediaEntityList.get(0);
-            thumbnailURL = mediaEntity.getUrl();
-            Loge.d("thumbnailURL: " + thumbnailURL);
-            Glide.with(context.getApplicationContext())
-                .load(thumbnailURL)
+            Glide.with(context)
+                .load(standardImage)
                 .placeholder(R.drawable.place_holder)
                 .into(viewHolder.imageView);
         } else {
             viewHolder.imageView.setVisibility(View.GONE);
         }
         return convertView;
+    }
+
+    private static class ViewHolder {
+        TextView newsTitle;
+        TextView newsAbstract;
+        ImageView imageView;
     }
 }

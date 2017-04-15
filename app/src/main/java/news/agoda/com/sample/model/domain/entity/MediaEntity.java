@@ -1,12 +1,24 @@
 package news.agoda.com.sample.model.domain.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * This class represents a media item
  */
-public class MediaEntity {
+public class MediaEntity implements Parcelable {
+    public static final String STANDARD_IMAGE_KEY = "Standard Thumbnail";
+    public static final String LARGE_IMAGE_KEY = "mediumThreeByTwo210";
+    public static final Parcelable.Creator<MediaEntity> CREATOR
+        = new Parcelable.Creator<MediaEntity>() {
+        @Override
+        public MediaEntity createFromParcel(Parcel source) {return new MediaEntity(source);}
+
+        @Override
+        public MediaEntity[] newArray(int size) {return new MediaEntity[size];}
+    };
     private String url;
     private String format;
     private int height;
@@ -25,6 +37,17 @@ public class MediaEntity {
         subType = jsonObject.optString("subtype");
         caption = jsonObject.optString("capton");
         copyright = jsonObject.optString("copyright");
+    }
+
+    protected MediaEntity(Parcel in) {
+        this.url = in.readString();
+        this.format = in.readString();
+        this.height = in.readInt();
+        this.width = in.readInt();
+        this.type = in.readString();
+        this.subType = in.readString();
+        this.caption = in.readString();
+        this.copyright = in.readString();
     }
 
     public String getUrl() {
@@ -57,5 +80,20 @@ public class MediaEntity {
 
     public String getCopyright() {
         return copyright;
+    }
+
+    @Override
+    public int describeContents() { return 0; }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.url);
+        dest.writeString(this.format);
+        dest.writeInt(this.height);
+        dest.writeInt(this.width);
+        dest.writeString(this.type);
+        dest.writeString(this.subType);
+        dest.writeString(this.caption);
+        dest.writeString(this.copyright);
     }
 }

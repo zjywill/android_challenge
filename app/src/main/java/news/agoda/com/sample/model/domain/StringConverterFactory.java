@@ -1,4 +1,4 @@
-package news.agoda.com.sample.util;
+package news.agoda.com.sample.model.domain;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

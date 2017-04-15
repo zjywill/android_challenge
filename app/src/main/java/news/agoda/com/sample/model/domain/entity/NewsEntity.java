@@ -1,5 +1,7 @@
 package news.agoda.com.sample.model.domain.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,15 @@ import org.json.JSONObject;
 /**
  * This represents a news item
  */
-public class NewsEntity {
+public class NewsEntity implements Parcelable {
+    public static final Parcelable.Creator<NewsEntity> CREATOR
+        = new Parcelable.Creator<NewsEntity>() {
+        @Override
+        public NewsEntity createFromParcel(Parcel source) {return new NewsEntity(source);}
+
+        @Override
+        public NewsEntity[] newArray(int size) {return new NewsEntity[size];}
+    };
     private static final String TAG = NewsEntity.class.getSimpleName();
     private String title;
     private String summary;
@@ -21,7 +31,6 @@ public class NewsEntity {
 
     public NewsEntity(JSONObject jsonObject) {
         try {
-            mediaEntityList = new ArrayList<>();
             title = jsonObject.optString("title");
             summary = jsonObject.optString("abstract");
             articleUrl = jsonObject.optString("url");
@@ -29,6 +38,7 @@ public class NewsEntity {
             publishedDate = jsonObject.optString("published_date");
             JSONArray mediaArray = jsonObject.optJSONArray("multimedia");
             if (mediaArray != null) {
+                mediaEntityList = new ArrayList<>();
                 for (int i = 0; i < mediaArray.length(); i++) {
                     JSONObject mediaObject = mediaArray.getJSONObject(i);
                     MediaEntity mediaEntity = new MediaEntity(mediaObject);
@@ -39,6 +49,15 @@ public class NewsEntity {
             exception.printStackTrace();
             Log.e(TAG, exception.getMessage());
         }
+    }
+
+    protected NewsEntity(Parcel in) {
+        this.title = in.readString();
+        this.summary = in.readString();
+        this.articleUrl = in.readString();
+        this.byline = in.readString();
+        this.publishedDate = in.readString();
+        this.mediaEntityList = in.createTypedArrayList(MediaEntity.CREATOR);
     }
 
     public String getTitle() {
@@ -63,5 +82,40 @@ public class NewsEntity {
 
     public List<MediaEntity> getMediaEntity() {
         return mediaEntityList;
+    }
+
+    public String getStandardImage() {
+        if (mediaEntityList != null) {
+            for (MediaEntity mediaEntity : mediaEntityList) {
+                if (mediaEntity.getFormat().equals(MediaEntity.STANDARD_IMAGE_KEY)) {
+                    return mediaEntity.getUrl();
+                }
+            }
+        }
+        return null;
+    }
+
+    public String getLargeImage() {
+        if (mediaEntityList != null) {
+            for (MediaEntity mediaEntity : mediaEntityList) {
+                if (mediaEntity.getFormat().equals(MediaEntity.LARGE_IMAGE_KEY)) {
+                    return mediaEntity.getUrl();
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int describeContents() { return 0; }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.summary);
+        dest.writeString(this.articleUrl);
+        dest.writeString(this.byline);
+        dest.writeString(this.publishedDate);
+        dest.writeTypedList(this.mediaEntityList);
     }
 }

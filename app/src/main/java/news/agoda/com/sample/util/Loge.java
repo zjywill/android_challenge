@@ -5,8 +5,8 @@ import news.agoda.com.sample.BuildConfig;
 
 public class Loge {
     public static final boolean LOG_STATUS = BuildConfig.DEBUG;
-    private static final String LOG_TAG = "XIJINFA";
-    private static String tag = "XIJINFA";
+    private static final String LOG_TAG = "AndroidTest";
+    private static String tag = "AndroidTest";
 
     private static Loge l = new Loge();
 
