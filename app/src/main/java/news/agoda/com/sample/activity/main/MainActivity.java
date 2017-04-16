@@ -23,6 +23,8 @@ public class MainActivity extends BaseFragmentActivity
     private ArticleFragment mArticleFragment;
     private int mHeadlineIndex = 0;
     private List<NewsEntity> mNewsEntities = new ArrayList<>();
+    private int mTopPadding = 0;
+    private int mResumeIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,26 @@ public class MainActivity extends BaseFragmentActivity
                 mHeadLineFragment.setSelection(mHeadlineIndex);
                 onHeadlineSelected(mHeadlineIndex);
             }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!mIsDualPane && mHeadLineFragment != null && mHeadLineFragment.getListView() != null) {
+            mHeadLineFragment.getListView().setSelectionFromTop(mResumeIndex, mTopPadding);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (!mIsDualPane && mHeadLineFragment != null && mHeadLineFragment.getListView() != null) {
+            mResumeIndex = mHeadLineFragment.getListView().getFirstVisiblePosition();
+            View v = mHeadLineFragment.getListView().getChildAt(0);
+            mTopPadding = (v == null)
+                          ? 0
+                          : (v.getTop() - mHeadLineFragment.getListView().getPaddingTop());
         }
     }
 
