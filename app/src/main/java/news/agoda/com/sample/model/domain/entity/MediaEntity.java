@@ -28,6 +28,8 @@ public class MediaEntity implements Parcelable {
     private String caption;
     private String copyright;
 
+    public MediaEntity() {}
+
     public MediaEntity(JSONObject jsonObject) throws JSONException {
         url = jsonObject.optString("url");
         format = jsonObject.optString("format");
@@ -80,6 +82,38 @@ public class MediaEntity implements Parcelable {
 
     public String getCopyright() {
         return copyright;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     @Override

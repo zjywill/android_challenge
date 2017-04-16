@@ -29,6 +29,10 @@ public class NewsEntity implements Parcelable {
     private String publishedDate;
     private List<MediaEntity> mediaEntityList;
 
+    public NewsEntity() {
+
+    }
+
     public NewsEntity(JSONObject jsonObject) {
         try {
             title = jsonObject.optString("title");
@@ -82,6 +86,30 @@ public class NewsEntity implements Parcelable {
 
     public List<MediaEntity> getMediaEntity() {
         return mediaEntityList;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setArticleUrl(String articleUrl) {
+        this.articleUrl = articleUrl;
+    }
+
+    public void setByline(String byline) {
+        this.byline = byline;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public void setMediaEntityList(List<MediaEntity> mediaEntityList) {
+        this.mediaEntityList = mediaEntityList;
     }
 
     public String getStandardImage() {

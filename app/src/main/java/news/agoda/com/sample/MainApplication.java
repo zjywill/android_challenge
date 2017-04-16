@@ -1,6 +1,7 @@
 package news.agoda.com.sample;
 
 import android.app.Application;
+import android.content.Context;
 import news.agoda.com.sample.injection.component.ApplicationComponent;
 import news.agoda.com.sample.injection.component.DaggerApplicationComponent;
 import news.agoda.com.sample.injection.module.AndroidModule;
@@ -19,6 +20,11 @@ public class MainApplication extends Application {
     // Needed to replace the component with a test specific one
     public static void setComponent(ApplicationComponent applicationComponent) {
         component = applicationComponent;
+    }
+
+    // *************** for testing **************
+    public static MainApplication get(Context context) {
+        return (MainApplication) context.getApplicationContext();
     }
 
     @Override
